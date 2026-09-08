@@ -13,7 +13,6 @@ body {
     font-family: var(--bs-body-font-family) !important;
     font-style: italic !important;
     color: var(--primary-color);
-    overflow-x: clip; /* Prevent horizontal scroll from AOS or Swiper */
 }
 
 /* Active Nav Link */
@@ -202,7 +201,46 @@ h1, h2, h3, h4, h5, h6, p, a, span, button, input, div, li {
 }
 
 html, body {
-    overflow-x: hidden;
     width: 100%;
     max-width: 100%;
+}
+
+main, #footer-placeholder {
+    overflow-x: clip;
+}
+
+/* Mobile Menu Full Screen Overlay */
+@media (max-width: 991.98px) {
+    #mainNavbar.collapse, 
+    #mainNavbar.collapsing, 
+    #mainNavbar.collapse.show {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1050;
+        border-top: 1px solid #eee;
+        padding-bottom: 3rem;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    #mainNavbar.collapse.show {
+        height: calc(100vh - 110px) !important;
+        overflow-y: auto;
+    }
+    
+    /* Ensure nav links have some padding and look good on mobile full screen */
+    #mainNavbar .navbar-nav {
+        padding-top: 1rem;
+    }
+    #mainNavbar .navbar-nav .nav-link {
+        padding: 0.75rem 0;
+        font-size: 1.1rem;
+    }
+    
+    /* Push the bottom elements properly */
+    #mainNavbar .d-flex {
+        padding-bottom: 2rem;
+    }
 }
