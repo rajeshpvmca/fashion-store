@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
+/* General Setup */
+:root {
+    --primary-color: #333;
+    --secondary-color: #777;
+    --bg-light: #f8f9fa;
+    --bs-font-sans-serif: 'ABeeZee', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+body {
+    font-family: var(--bs-body-font-family) !important;
+    font-style: italic !important;
+    color: var(--primary-color);
+    overflow-x: hidden; /* Prevent horizontal scroll from AOS or Swiper */
+}
+
+/* Force Italic globally per user request */
+h1, h2, h3, h4, h5, h6, p, a, span, button, input, div, li {
+    font-style: italic !important;
+}
+
+/* Protect Icons from becoming italic */
+.bi, .bi::before, [class^="bi-"]::before, [class*=" bi-"]::before,
+.swiper-button-prev::after, .swiper-button-next::after {
+    font-style: normal !important;
+}
+
+/* Typography Utilities */
+.fs-7 { font-size: 0.85rem; }
+.fs-8 { font-size: 0.75rem; }
+.tracking-wide { letter-spacing: 0.05em; }
+.lh-base { line-height: 1.5; }
+
+/* Interactive Elements */
+.transition-transform {
+    transition: transform 0.5s ease;
+}
+.category-card:hover .transition-transform,
+.promo-card:hover .transition-transform,
+.product-card:hover .transition-transform {
+    transform: scale(1.05);
+}
+
+/* Custom Swiper Buttons (Clean Minimalist Arrows) */
+.custom-swiper-btn {
+    color: #000 !important;
+    background: rgba(255, 255, 255, 0.9);
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.custom-swiper-btn::after {
+    font-size: 1.2rem !important;
+    font-weight: bold;
+}
+.custom-swiper-btn:hover {
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* Header Adjustments */
+.navbar-nav .nav-link {
+    position: relative;
+    padding-bottom: 2px;
+}
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    transition: width 0.3s ease;
+}
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Carousel Pagination Adjustments */
+.testimonial-swiper .swiper-pagination-bullet,
+.featured-swiper .swiper-pagination-bullet {
+    background: #ccc;
+    opacity: 1;
+}
+.testimonial-swiper .swiper-pagination-bullet-active,
+.featured-swiper .swiper-pagination-bullet-active {
+    background: #000;
+}
+
+/* Featured & Social & Testimonial Arrows (Figma style: thin, dark, outside) */
+.swiper-button-prev-featured,
+.swiper-button-next-featured,
+.swiper-button-prev-social,
+.swiper-button-next-social,
+.swiper-button-prev-testi,
+.swiper-button-next-testi {
+    color: #333 !important;
+}
+.swiper-button-prev-featured::after,
+.swiper-button-next-featured::after,
+.swiper-button-prev-social::after,
+.swiper-button-next-social::after,
+.swiper-button-prev-testi::after,
+.swiper-button-next-testi::after {
+    font-size: 2.5rem !important;
+    font-weight: 200 !important;
+}
+.swiper-button-prev-featured,
+.swiper-button-prev-social,
+.swiper-button-prev-testi {
+    left: -30px;
+}
+.swiper-button-next-featured,
+.swiper-button-next-social,
+.swiper-button-next-testi {
+    right: -30px;
+}
+
+/* Wide Banner Parallax Effect */
+.wide-banner {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

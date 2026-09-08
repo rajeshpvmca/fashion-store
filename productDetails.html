@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Everlane</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* Product Details Specific Styles */
+        .breadcrumb-link {
+            font-size: 0.75rem;
+            color: #666;
+            text-decoration: none;
+            font-style: italic;
+        }
+        .product-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 0.5rem 0;
+            color: #000;
+            font-style: normal !important;
+        }
+        .product-price {
+            font-size: 1.1rem;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #888;
+            margin-right: 10px;
+        }
+        .star-rating i {
+            color: #222;
+            font-size: 0.85rem;
+            font-style: normal !important;
+        }
+        .reviews-count {
+            font-size: 0.8rem;
+            color: #666;
+            margin-left: 5px;
+            text-decoration: underline;
+        }
+        
+        /* Swatches and Sizes */
+        .color-label {
+            font-size: 0.85rem;
+            color: #000;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .color-swatch-wrapper {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .color-swatch.active {
+            border: 2px solid #000;
+            padding: 2px;
+            background-clip: content-box;
+        }
+        
+        .size-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .size-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0;
+        }
+        .size-guide {
+            font-size: 0.75rem;
+            color: #666;
+            text-decoration: underline;
+        }
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 2rem;
+        }
+        .size-box {
+            border: 1px solid #ddd;
+            background-color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #000;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            font-style: normal !important;
+        }
+        .size-box:hover, .size-box.active {
+            border-color: #000;
+            border-width: 1px;
+        }
+        
+        /* Info Rows (Shipping, Returns) */
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #333;
+        }
+        .info-row i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            margin-top: 2px;
+            color: #000;
+            font-style: normal !important;
+        }
+        .info-row a {
+            color: #666;
+            text-decoration: underline;
+        }
+        
+        /* Product Description Details */
+        .desc-text {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #333;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+            font-size: 0.85rem;
+            color: #333;
+        }
+        .details-list li {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        .details-list .lbl {
+            font-weight: 600;
+            width: 80px;
+            flex-shrink: 0;
+        }
+        .sustainability-tags {
+            display: flex;
+            gap: 20px;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+        .sustainability-tag {
+            display: flex;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #333;
+        }
+        .sustainability-tag img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        /* Image Grid layout */
+        .product-images-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .product-image-wrapper {
+            position: relative;
+            background-color: #f6f6f6;
+            aspect-ratio: 4/5;
+        }
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #fff;
+            color: #d92d2d;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            z-index: 2;
+            font-style: italic;
+        }
+        
+        /* Sticky Details Column */
+        @media (min-width: 992px) {
+            .details-sticky {
+                position: sticky;
+                top: 80px;
+            }
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            border-top: 1px solid #eee;
+            padding-top: 4rem;
+            margin-top: 4rem;
+        }
+        .reviews-header {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: normal !important;
+        }
+        .reviews-summary-box {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .rating-bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        .rating-bar {
+            width: 150px;
+            height: 4px;
+            background-color: #e0e0e0;
+            margin: 0 10px;
+            border-radius: 2px;
+        }
+        .rating-bar-fill {
+            height: 100%;
+            background-color: #000;
+            border-radius: 2px;
+        }
+        .fit-slider-container {
+            width: 100%;
+            max-width: 250px;
+            margin-top: 10px;
+        }
+        .fit-slider-line {
+            height: 4px;
+            background-color: #e0e0e0;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        .fit-slider-thumb {
+            width: 24px;
+            height: 4px;
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .fit-slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        .review-item {
+            border-top: 1px solid #eee;
+            padding: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .review-author {
+            width: 25%;
+            padding-right: 20px;
+        }
+        .review-content {
+            width: 75%;
+        }
+        @media (max-width: 768px) {
+            .review-author, .review-content { width: 100%; }
+            .review-author { margin-bottom: 1rem; }
+            .size-grid { grid-template-columns: repeat(3, 1fr); }
+            .reviews-summary-box { flex-direction: column; gap: 2rem; align-items: flex-start; }
+            .product-images-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Transparent Pricing */
+        .transparent-pricing {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid #eee;
+        }
+        .tp-icons-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .tp-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+        }
+        .tp-item i {
+            font-size: 2rem;
+            color: #000;
+            margin-bottom: 10px;
+            font-style: normal !important;
+        }
+        .tp-item span {
+            font-size: 0.75rem;
+            color: #333;
+        }
+        .tp-item .val {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    <!-- Dynamic Header -->
+    <div id="header-placeholder"></div>
+
+    <main class="py-4 mt-2">
+        <div class="container ">
+            <div class="row g-4 g-lg-5">
+                
+                <!-- Left Column: Product Images -->
+                <div class="col-12 col-lg-7">
+                    <div class="product-images-grid">
+                        <div class="product-image-wrapper">
+                            <div class="sale-badge">30% off</div>
+                            <img src="./assets/images/product_details_01.webp" class="w-100 h-100 object-fit-cover" alt="Product Image 1">
+                        </div>
+                        <div class="product-image-wrapper">
+                            <img src="./assets/images/product_details_02.webp" class="w-100 h-100 object-fit-cover" alt="Product Image 2">
+                        </div>
+                        <div class="product-image-wrapper">
+                            <img src="./assets/images/product_details_03.webp" class="w-100 h-100 object-fit-cover" alt="Product Image 3">
+                        </div>
+                        <div class="product-image-wrapper">
+                            <img src="./assets/images/product_details_04.webp" class="w-100 h-100 object-fit-cover" alt="Product Image 4">
+                        </div>
+                        <div class="product-image-wrapper">
+                            <img src="./assets/images/product_details_05.webp" class="w-100 h-100 object-fit-cover" alt="Product Image 5">
+                        </div>
+                        <div class="product-image-wrapper">
+                            <img src="./assets/images/product_details_06.webp" class="w-100 h-100 object-fit-cover" alt="Product Image 6">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Product Details (Sticky on Desktop) -->
+                <div class="col-12 col-lg-5">
+                    <div class="details-sticky">
+                        <a href="#" class="breadcrumb-link">Men / Outerwear / Shirt Jackets</a>
+                        
+                        <div class="d-flex justify-content-between align-items-start mt-2">
+                            <h1 class="product-title">The Heavyweight Oversized Shirt Jacket</h1>
+                            <div class="product-price text-end">
+                                <span class="original-price">$178</span>
+                                <span>$124</span>
+                            </div>
+                        </div>
+
+                        <div class="star-rating d-flex align-items-center mb-4">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span class="reviews-count">(111 Reviews)</span>
+                        </div>
+
+                        <div class="color-label">Color: Black / Olive</div>
+                        <div class="color-swatch-wrapper">
+                            <div class="color-swatch" style="background-color: #2b5585;"></div>
+                            <div class="color-swatch active" style="background-color: #6b4c3a;"></div>
+                        </div>
+
+                        <div class="size-header">
+                            <span class="size-label">Size</span>
+                            <a href="#" class="size-guide">Size Guide</a>
+                        </div>
+                        <div class="size-grid">
+                            <div class="size-box">XS</div>
+                            <div class="size-box">S</div>
+                            <div class="size-box active">M</div>
+                            <div class="size-box">L</div>
+                            <div class="size-box">XL</div>
+                            <div class="size-box">XXL</div>
+                        </div>
+
+                        <button class="btn btn-dark w-100 rounded-0 py-3 mb-4 fw-bold fs-7" style="letter-spacing: 1px; font-style: normal !important;" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer">ADD TO BAG</button>
+
+                        <div class="info-row">
+                            <i class="bi bi-truck"></i>
+                            <div>
+                                <span class="fw-bold d-block mb-1" style="font-style: normal !important;">Free Shipping</span>
+                                <span style="color:#666;">On all U.S. orders over $100. <a href="#">Learn More.</a></span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i class="bi bi-box-seam"></i>
+                            <div>
+                                <span class="fw-bold d-block mb-1" style="font-style: normal !important;">Easy Returns</span>
+                                <span style="color:#666;">We accept returns within 30 days. <a href="#">Return Policy.</a></span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i class="bi bi-shop"></i>
+                            <div>
+                                <span class="fw-bold d-block mb-1" style="font-style: normal !important;">Buy in-store</span>
+                                <span style="color:#666;">Check availability at your local store.</span>
+                            </div>
+                        </div>
+
+                        <div class="desc-text">
+                            Part shirt, part jacket, all style. Meet your new chilly-weather staple. The Heavyweight Oversized Shirt Jacket features a classic collar, drop shoulders, button-front closure, and dual chest patch pockets. The oversized fit means it layers perfectly over a tee or lightweight sweater. Made from a heavy blend of recycled materials, it's the perfect transitional piece.
+                        </div>
+
+                        <ul class="details-list">
+                            <li>
+                                <span class="lbl">Model</span>
+                                <span>Model is 6'2" wearing size M</span>
+                            </li>
+                            <li>
+                                <span class="lbl">Fit</span>
+                                <span>Oversized fit.</span>
+                            </li>
+                        </ul>
+
+                        <div class="sustainability-tags">
+                            <div class="sustainability-tag">
+                                <i class="bi bi-recycle fs-4 me-2"></i> Recycled Materials
+                            </div>
+                            <div class="sustainability-tag">
+                                <i class="bi bi-droplet fs-4 me-2"></i> Cleaner Chemistry
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Products -->
+            <div class="mt-5 pt-5">
+                <h3 class="fs-5 fw-bold mb-4 text-dark" style="font-style: normal !important;">Recommended Products</h3>
+                <div class="row g-3 g-md-4">
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="text-decoration-none text-dark d-block">
+                            <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                <img src="./assets/images/product_details_07.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                            </div>
+                            <h6 class="fs-8 fw-normal mb-1">The Bomber Jacket</h6>
+                            <p class="fs-8 text-secondary mb-0">$120</p>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="text-decoration-none text-dark d-block">
+                            <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                <img src="./assets/images/product_details_08.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                            </div>
+                            <h6 class="fs-8 fw-normal mb-1">The Puffer Jacket</h6>
+                            <p class="fs-8 text-secondary mb-0">$168</p>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="text-decoration-none text-dark d-block">
+                            <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                <img src="./assets/images/product_details_09.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                            </div>
+                            <h6 class="fs-8 fw-normal mb-1">The Denim Jacket</h6>
+                            <p class="fs-8 text-secondary mb-0">$98</p>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="text-decoration-none text-dark d-block">
+                            <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                <img src="./assets/images/product_details_10.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                            </div>
+                            <h6 class="fs-8 fw-normal mb-1">The Fleece Zip-Up</h6>
+                            <p class="fs-8 text-secondary mb-0">$110</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="reviews-section">
+                <h3 class="reviews-header">Reviews</h3>
+                
+                <div class="reviews-summary-box">
+                    <div>
+                        <div class="fs-5 fw-bold mb-2 text-dark" style="font-style: normal !important;">5.0 Overall Rating</div>
+                        <div class="star-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="rating-bar-row">
+                            <span>5</span>
+                            <div class="rating-bar"><div class="rating-bar-fill" style="width: 100%;"></div></div>
+                            <span>111</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>4</span>
+                            <div class="rating-bar"><div class="rating-bar-fill" style="width: 0%;"></div></div>
+                            <span>0</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>3</span>
+                            <div class="rating-bar"><div class="rating-bar-fill" style="width: 0%;"></div></div>
+                            <span>0</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>2</span>
+                            <div class="rating-bar"><div class="rating-bar-fill" style="width: 0%;"></div></div>
+                            <span>0</span>
+                        </div>
+                        <div class="rating-bar-row">
+                            <span>1</span>
+                            <div class="rating-bar"><div class="rating-bar-fill" style="width: 0%;"></div></div>
+                            <span>0</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="fs-8 fw-bold mb-2 text-dark" style="font-style: normal !important;">Runs Slightly Large</div>
+                        <div class="fit-slider-container">
+                            <div class="fit-slider-line">
+                                <div class="fit-slider-thumb" style="left: 75%;"></div>
+                            </div>
+                            <div class="fit-slider-labels">
+                                <span>Runs Small</span>
+                                <span>Runs Large</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-4">
+                    <select class="form-select form-select-sm w-auto rounded-0 border-light-subtle shadow-none">
+                        <option>Filter</option>
+                    </select>
+                    <select class="form-select form-select-sm w-auto rounded-0 border-light-subtle shadow-none">
+                        <option>Sort By: Highest Rated</option>
+                    </select>
+                </div>
+
+                <!-- Review 1 -->
+                <div class="review-item">
+                    <div class="review-author">
+                        <div class="fw-bold fs-8 text-dark mb-1" style="font-style: normal !important;">Evan Williams</div>
+                        <div class="fs-8 text-secondary mb-2"><i class="bi bi-check-circle-fill text-success me-1"></i> Verified Buyer</div>
+                        <div class="fs-8 text-secondary">Size Purchased: M<br>Height: 6'1" - 6'3"<br>Weight: 170 - 180 lbs</div>
+                    </div>
+                    <div class="review-content">
+                        <div class="star-rating mb-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span class="float-end fs-8 text-secondary">2 days ago</span>
+                        </div>
+                        <div class="fw-bold fs-7 mb-2 text-dark" style="font-style: normal !important;">Warm and very versatile</div>
+                        <p class="fs-8 text-dark lh-base mb-3">Great fit. It's an amazing layering piece for chilly days. Love the color. The oversized fit means it layers perfectly over a tee or lightweight sweater.</p>
+                        <div class="fs-8 text-secondary">
+                            Was this helpful? <a href="#" class="text-secondary ms-2 me-2">Yes (0)</a> | <a href="#" class="text-secondary ms-2">No (0)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-item border-bottom">
+                    <div class="review-author">
+                        <div class="fw-bold fs-8 text-dark mb-1" style="font-style: normal !important;">Anthony Diaz</div>
+                        <div class="fs-8 text-secondary mb-2"><i class="bi bi-check-circle-fill text-success me-1"></i> Verified Buyer</div>
+                        <div class="fs-8 text-secondary">Size Purchased: L<br>Height: 6'0" - 6'2"<br>Weight: 190 - 200 lbs</div>
+                    </div>
+                    <div class="review-content">
+                        <div class="star-rating mb-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span class="float-end fs-8 text-secondary">14 days ago</span>
+                        </div>
+                        <div class="fw-bold fs-7 mb-2 text-dark" style="font-style: normal !important;">Great Quality</div>
+                        <p class="fs-8 text-dark lh-base mb-3">High quality, warm and heavy jacket. Exactly what I was looking for. Fits perfectly over a sweater.</p>
+                        <div class="fs-8 text-secondary">
+                            Was this helpful? <a href="#" class="text-secondary ms-2 me-2">Yes (2)</a> | <a href="#" class="text-secondary ms-2">No (0)</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Transparent Pricing Section -->
+            <div class="transparent-pricing">
+                <h3 class="fs-5 fw-bold mb-3 text-dark" style="font-style: normal !important;">Transparent Pricing</h3>
+                <p class="fs-7 text-secondary mx-auto" style="max-width: 600px;">We believe we should all know what our clothes cost to make. This is a breakdown of what it costs us to make this item. We then mark it up just enough to cover our costs and make a small profit - but significantly less than traditional retail.</p>
+                
+                <div class="tp-icons-wrapper">
+                    <div class="tp-item">
+                        <i class="bi bi-layers"></i>
+                        <span>Materials</span>
+                        <span class="val">$25.00</span>
+                    </div>
+                    <div class="tp-item">
+                        <i class="bi bi-gear"></i>
+                        <span>Hardware</span>
+                        <span class="val">$4.50</span>
+                    </div>
+                    <div class="tp-item">
+                        <i class="bi bi-scissors"></i>
+                        <span>Labor</span>
+                        <span class="val">$15.75</span>
+                    </div>
+                    <div class="tp-item">
+                        <i class="bi bi-receipt"></i>
+                        <span>Duties</span>
+                        <span class="val">$4.80</span>
+                    </div>
+                    <div class="tp-item">
+                        <i class="bi bi-truck"></i>
+                        <span>Transport</span>
+                        <span class="val">$1.50</span>
+                    </div>
+                    <div class="tp-item" style="border-left: 1px solid #ddd; padding-left: 20px; margin-left: 10px;">
+                        <i class="bi bi-tag"></i>
+                        <span class="fw-bold" style="font-style: normal !important;">True Cost</span>
+                        <span class="val">$51.55</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Dynamic Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
