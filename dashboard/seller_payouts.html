@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Payouts</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body { padding: 20px; background: #f8f9fa; font-family: sans-serif; }
+        body * { font-style: normal !important; }
+        .card { background-color: #fff; border: 1px solid #dee2e6; border-radius: 0.5rem; }
+        .btn-dark { background-color: #000; border-color: #000; }
+        .btn-dark:hover { background-color: #333; border-color: #333; }
+        .table-responsive { white-space: nowrap; }
+    </style>
+</head>
+<body>
+    <div >
+        <h2 class="mb-4">Payouts</h2>
+        
+        <div class="row g-3 mb-4">
+            <div class="col-md-6 col-sm-12">
+                <div class="card p-4 shadow-sm h-100 text-center">
+                    <h5 class="text-muted">Current Balance</h5>
+                    <h2 class="display-5 fw-bold">$3,450.00</h2>
+                    <p class="mb-0 text-success"><i class="bi bi-arrow-up-right"></i> +$450 this week</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card p-4 shadow-sm h-100 d-flex flex-column justify-content-center align-items-center">
+                    <h5 class="text-muted">Next Payout Date</h5>
+                    <h3 class="mb-3">September 15, 2026</h3>
+                    <button class="btn btn-dark">Request Early Payout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3 shadow-sm">
+            <h5 class="card-title mb-3">Past Transactions</h5>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction ID</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sep 01, 2026</td>
+                            <td>TXN-908123</td>
+                            <td>$2,100.00</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aug 15, 2026</td>
+                            <td>TXN-907456</td>
+                            <td>$1,850.00</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aug 01, 2026</td>
+                            <td>TXN-906789</td>
+                            <td>$2,340.00</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

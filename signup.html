@@ -157,35 +157,72 @@
                             </a>
                             <h1 class="login-title">Get Started Now</h1>
 
-                            <form>
+                            <form id="signupForm">
+                                <!-- Roles -->
+                                <div class="mb-3 d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="role" id="roleCustomer" value="Customer" checked>
+                                        <label class="form-check-label" for="roleCustomer">Customer</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="role" id="roleSeller" value="Seller">
+                                        <label class="form-check-label" for="roleSeller">Seller</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="role" id="roleAdmin" value="Admin">
+                                        <label class="form-check-label" for="roleAdmin">Admin</label>
+                                    </div>
+                                </div>
+
                                 <!-- Name Field -->
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
                                 </div>
 
                                 <!-- Email Field -->
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
                                 </div>
 
                                 <!-- Password Field -->
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                                    <div class="position-relative mb-2">
+                                        <input type="password" class="form-control pe-5" id="password" placeholder="Enter your password" required>
+                                        <span class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: #666;">
+                                            <i class="bi bi-eye-slash" style="font-style: normal !important;"></i>
+                                        </span>
+                                    </div>
+                                    <!-- Password Strength Bar -->
+                                    <div class="progress" style="height: 5px;">
+                                        <div id="strengthBar" class="progress-bar bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small id="strengthText" class="text-muted" style="font-size: 0.7rem;">Password must be at least 8 characters</small>
+                                </div>
+
+                                <!-- Confirm Password Field -->
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control pe-5" id="confirmPassword" placeholder="Confirm your password" required>
+                                        <span class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: #666;">
+                                            <i class="bi bi-eye-slash" style="font-style: normal !important;"></i>
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <!-- Terms Checkbox -->
                                 <div class="mb-4 form-check d-flex align-items-center gap-2">
-                                    <input type="checkbox" class="form-check-input mt-0" id="terms" style="border-radius: 3px; cursor: pointer;">
+                                    <input type="checkbox" class="form-check-input mt-0" id="terms" style="border-radius: 3px; cursor: pointer;" required>
                                     <label class="form-check-label" for="terms" style="cursor: pointer;">
                                         I agree to the <a href="#" class="terms-link">terms & policy</a>
                                     </label>
                                 </div>
 
                                 <!-- Signup Button -->
-                                <button type="button" class="btn btn-login w-100">Signup</button>
+                                <button type="submit" class="btn btn-login w-100">Signup</button>
                             </form>
 
                             <!-- Divider -->
@@ -238,6 +275,43 @@
     <!-- AOS Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Custom JS -->
+    <script src="./assets/js/main.js"></script>
     <script src="./assets/js/auth.js"></script>
+    <script>
+        // Toggle Password Visibility
+        const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+        const loginPassword = document.getElementById('loginPassword');
+        if (togglePasswordBtn && loginPassword) {
+            togglePasswordBtn.addEventListener('click', function () {
+                const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPassword.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        }
+        
+        // Live password strength
+        const pwdInput = document.getElementById('loginPassword');
+        const bar = document.getElementById('strengthBar');
+        if (pwdInput && bar) {
+            const rules = {
+                'r-len': v => v.length >= 8,
+                'r-upper': v => /[A-Z]/.test(v),
+                'r-num': v => /[0-9]/.test(v),
+                'r-sym': v => /[^A-Za-z0-9]/.test(v)
+            };
+            const colors = ['#dc3545', '#fd7e14', '#ffc107', '#10b981'];
+            
+            pwdInput.addEventListener('input', () => {
+                const v = pwdInput.value;
+                let passed = 0;
+                Object.values(rules).forEach(fn => {
+                    if (fn(v)) passed++;
+                });
+                bar.style.width = (passed / 4 * 100) + '%';
+                bar.style.background = colors[passed - 1] || 'rgba(255,255,255,0.1)';
+            });
+        }
+    </script>
 </body>
 </html>

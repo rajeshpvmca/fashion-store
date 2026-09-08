@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (roleBadge) roleBadge.textContent = role;
 
     const navAdmin = document.getElementById('navAdmin');
-    const navEngineer = document.getElementById('navEngineer');
-    const navAnalyst = document.getElementById('navAnalyst');
+    const navCustomer = document.getElementById('navCustomer');
+    const navSeller = document.getElementById('navSeller');
 
     if (navAdmin) navAdmin.style.display = role === 'Admin' ? 'block' : 'none';
-    if (navEngineer) navEngineer.style.display = role === 'Engineer' ? 'block' : 'none';
-    if (navAnalyst) navAnalyst.style.display = role === 'Analyst' ? 'block' : 'none';
+    if (navCustomer) navCustomer.style.display = role === 'Customer' ? 'block' : 'none';
+    if (navSeller) navSeller.style.display = role === 'Seller' ? 'block' : 'none';
 
     // Signout Logic
     const signoutBtn = document.getElementById('signoutBtn');
@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define default pages for each role
     const roleDefaults = {
         'Admin': 'admin_overview',
-        'Engineer': 'engineer_overview',
-        'Analyst': 'analyst_overview'
+        'Customer': 'customer_orders',
+        'Seller': 'seller_overview'
     };
 
     // Restore last page

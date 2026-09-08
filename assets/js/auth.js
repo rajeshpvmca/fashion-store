@@ -1,7 +1,4 @@
-
-
 // REGISTER
-
 const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
@@ -70,6 +67,20 @@ if (loginForm) {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
 
+    // Password validation for login as requested
+    if (password.length < 8) {
+      showError("loginPassword", "Password must be at least 8 characters."); return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      showError("loginPassword", "Password must contain at least one uppercase letter."); return;
+    }
+    if (!/[0-9]/.test(password)) {
+      showError("loginPassword", "Password must contain at least one number."); return;
+    }
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      showError("loginPassword", "Password must contain at least one symbol (!@#$%…)."); return;
+    }
+
     // Demo Login: Create session even if not registered
     const user = { name: email.split("@")[0], role: role, email: email };
     localStorage.setItem("loggedInUser", JSON.stringify(user));
@@ -88,8 +99,45 @@ document.querySelectorAll('.toggle-password').forEach(toggle => {
         
             // Toggle the eye icon
             const icon = this.querySelector('i');
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
+            icon.classList.toggle('bi-eye');
+            icon.classList.toggle('bi-eye-slash');
         }
     });
 });
+
+// Password Strength Indicator
+const passwordInput = document.getElementById('password');
+const strengthBar = document.getElementById('strengthBar');
+const strengthText = document.getElementById('strengthText');
+
+if (passwordInput && strengthBar && strengthText) {
+    passwordInput.addEventListener('input', function() {
+        const val = passwordInput.value;
+        let strength = 0;
+        
+        if (val.length >= 8) strength += 25;
+        if (/[A-Z]/.test(val)) strength += 25;
+        if (/[0-9]/.test(val)) strength += 25;
+        if (/[^A-Za-z0-9]/.test(val)) strength += 25;
+        
+        strengthBar.style.width = strength + '%';
+        
+        if (strength === 0) {
+            strengthBar.className = 'progress-bar bg-danger';
+            strengthText.textContent = 'Password must be at least 8 characters';
+            strengthText.className = 'text-muted';
+        } else if (strength < 50) {
+            strengthBar.className = 'progress-bar bg-danger';
+            strengthText.textContent = 'Weak';
+            strengthText.className = 'text-danger';
+        } else if (strength < 100) {
+            strengthBar.className = 'progress-bar bg-warning';
+            strengthText.textContent = 'Medium';
+            strengthText.className = 'text-warning';
+        } else {
+            strengthBar.className = 'progress-bar bg-success';
+            strengthText.textContent = 'Strong';
+            strengthText.className = 'text-success';
+        }
+    });
+}

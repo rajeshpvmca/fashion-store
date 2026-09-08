@@ -164,21 +164,47 @@
                             <h1 class="login-title">Welcome back!</h1>
                             <p class="login-subtitle">Enter your Credentials to access your account</p>
 
-                            <form>
+                            <form id="loginForm">
+                                <!-- Roles -->
+                                <div class="mb-3 d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="loginRole" id="roleCustomer" value="Customer" checked>
+                                        <label class="form-check-label" for="roleCustomer">Customer</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="loginRole" id="roleSeller" value="Seller">
+                                        <label class="form-check-label" for="roleSeller">Seller</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="loginRole" id="roleAdmin" value="Admin">
+                                        <label class="form-check-label" for="roleAdmin">Admin</label>
+                                    </div>
+                                </div>
+
                                 <!-- Email Field -->
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                    <label for="loginEmail" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
                                 </div>
 
                                 <!-- Password Field -->
                                 <div class="mb-3">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
-                                        <label for="password" class="form-label mb-0">Password</label>
+                                        <label for="loginPassword" class="form-label mb-0">Password</label>
                                         <a href="#" class="forgot-link">forgot password</a>
                                     </div>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control pe-5" id="loginPassword" placeholder="Enter your password" required>
+                                        <span class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: #666;">
+                                            <i class="bi bi-eye-slash" style="font-style: normal !important;"></i>
+                                        </span>
+                                    </div>
                                 </div>
+
+                                <!-- Strength bar -->
+                        <div class="mb-2" style="height:4px;border-radius:4px;background:rgba(255,255,255,0.1);overflow:hidden;">
+                            <div id="strengthBar" style="height:100%;width:0;transition:width 0.3s, background 0.3s;"></div>
+                        </div>
 
                                 <!-- Remember Me -->
                                 <div class="mb-4 form-check d-flex align-items-center gap-2">
@@ -187,7 +213,7 @@
                                 </div>
 
                                 <!-- Login Button -->
-                                <button type="button" class="btn btn-login w-100">Login</button>
+                                <button type="submit" class="btn btn-login w-100">Login</button>
                             </form>
 
                             <!-- Divider -->
@@ -240,6 +266,43 @@
     <!-- AOS Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Custom JS -->
+    <script src="./assets/js/main.js"></script>
     <script src="./assets/js/auth.js"></script>
+    <script>
+        // Toggle Password Visibility
+        const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+        const loginPassword = document.getElementById('loginPassword');
+        if (togglePasswordBtn && loginPassword) {
+            togglePasswordBtn.addEventListener('click', function () {
+                const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPassword.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        }
+        
+        // Live password strength
+        const pwdInput = document.getElementById('loginPassword');
+        const bar = document.getElementById('strengthBar');
+        if (pwdInput && bar) {
+            const rules = {
+                'r-len': v => v.length >= 8,
+                'r-upper': v => /[A-Z]/.test(v),
+                'r-num': v => /[0-9]/.test(v),
+                'r-sym': v => /[^A-Za-z0-9]/.test(v)
+            };
+            const colors = ['#dc3545', '#fd7e14', '#ffc107', '#10b981'];
+            
+            pwdInput.addEventListener('input', () => {
+                const v = pwdInput.value;
+                let passed = 0;
+                Object.values(rules).forEach(fn => {
+                    if (fn(v)) passed++;
+                });
+                bar.style.width = (passed / 4 * 100) + '%';
+                bar.style.background = colors[passed - 1] || 'rgba(255,255,255,0.1)';
+            });
+        }
+    </script>
 </body>
 </html>

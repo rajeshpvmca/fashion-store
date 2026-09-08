@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Orders</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body { padding: 20px; background: #f8f9fa; font-family: sans-serif; }
+        body * { font-style: normal !important; }
+        .card { background-color: #fff; border: 1px solid #dee2e6; border-radius: 0.5rem; }
+        .btn-dark { background-color: #000; border-color: #000; }
+        .btn-dark:hover { background-color: #333; border-color: #333; }
+        .table-responsive { white-space: nowrap; }
+    </style>
+</head>
+<body>
+    <div >
+        <h2 class="mb-4">Order Fulfillment</h2>
+        
+        <div class="card p-3 shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#ORD-8921</td>
+                            <td>Alice Johnson</td>
+                            <td>2x Winter Outerwear</td>
+                            <td>$240.00</td>
+                            <td>
+                                <select class="form-select form-select-sm" aria-label="Order Status">
+                                    <option value="pending">Pending</option>
+                                    <option value="processing" selected>Processing</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#ORD-8922</td>
+                            <td>Bob Smith</td>
+                            <td>1x Classic Denim Jacket</td>
+                            <td>$85.00</td>
+                            <td>
+                                <select class="form-select form-select-sm" aria-label="Order Status">
+                                    <option value="pending">Pending</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="shipped" selected>Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

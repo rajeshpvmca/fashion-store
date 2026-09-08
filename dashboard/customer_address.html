@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Addresses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body { padding: 20px; background: #f8f9fa; font-family: sans-serif; }
+        * { font-style: normal !important; }
+        .card { border: 1px solid #dee2e6; border-radius: 8px; background-color: #fff; }
+        .btn-dark { background-color: #000; color: #fff; border: none; }
+        .btn-dark:hover { background-color: #333; }
+        .btn-outline-dark { color: #000; border-color: #000; }
+        .btn-outline-dark:hover { background-color: #000; color: #fff; }
+    </style>
+</head>
+<body>
+    <div >
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+            <h2 class="mb-0">My Addresses</h2>
+            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+                <i class="bi bi-plus-lg"></i> Add New Address
+            </button>
+        </div>
+        <div class="row g-4">
+            <div class="col-12 col-md-6">
+                <div class="card p-4 h-100">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="mb-0">Billing Address <span class="badge bg-secondary ms-2" style="font-size: 0.75rem;">Default</span></h5>
+                        <div>
+                            <button class="btn btn-link text-dark p-0 me-3" title="Edit"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-link text-danger p-0" title="Delete"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                    <address class="mb-0 text-muted" style="line-height: 1.6;">
+                        <strong class="text-dark">John Doe</strong><br>
+                        123 Fashion Street<br>
+                        Suite 100<br>
+                        New York, NY 10001<br>
+                        United States
+                    </address>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-4 h-100">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="mb-0">Shipping Address</h5>
+                        <div>
+                            <button class="btn btn-link text-dark p-0 me-3" title="Edit"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-link text-danger p-0" title="Delete"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                    <address class="mb-0 text-muted" style="line-height: 1.6;">
+                        <strong class="text-dark">John Doe</strong><br>
+                        456 Style Avenue<br>
+                        Apt 4B<br>
+                        Los Angeles, CA 90001<br>
+                        United States
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Address Modal -->
+    <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title" id="addAddressModalLabel">Add New Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Full Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Street Address</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-semibold">City</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-semibold">ZIP Code</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Country</label>
+                            <select class="form-select">
+                                <option>United States</option>
+                                <option>Canada</option>
+                                <option>United Kingdom</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-top">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-dark">Save Address</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
