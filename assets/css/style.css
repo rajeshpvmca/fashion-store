@@ -200,3 +200,9 @@ h1, h2, h3, h4, h5, h6, p, a, span, button, input, div, li {
     50% { width: 80%; }
     100% { width: 100%; }
 }
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
