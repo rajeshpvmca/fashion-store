@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Make the placeholder itself sticky so the injected header stays on top
             placeholder.style.position = 'sticky';
             placeholder.style.top = '0';
-            placeholder.style.zIndex = '1050';
+            placeholder.style.zIndex = '1020';
 
             // Set active menu link based on current URL
             let currentPath = window.location.pathname.split('/').pop();
