@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Everlane</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        /* Login Page Specific Styles */
+        .login-section {
+            min-height: calc(100vh - 150px);
+            display: flex;
+            align-items: center;
+        }
+        .login-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #000;
+            font-style: normal !important;
+        }
+        .login-subtitle {
+            font-size: 0.85rem;
+            color: #333;
+            margin-bottom: 2rem;
+            font-style: normal !important;
+        }
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #000;
+            font-style: normal !important;
+        }
+        .form-control {
+            font-size: 0.85rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: none !important;
+            font-style: normal !important;
+        }
+        .form-control:focus {
+            border-color: #000;
+        }
+        .forgot-link {
+            font-size: 0.75rem;
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: 500;
+            font-style: normal !important;
+        }
+        .form-check-label {
+            font-size: 0.75rem;
+            color: #333;
+            font-style: normal !important;
+        }
+        .btn-login {
+            background-color: #e6ded8; /* Light beige matching image */
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: none;
+            font-style: normal !important;
+        }
+        .btn-login:hover {
+            background-color: #d8cec6;
+            color: #000;
+        }
+        .divider-container {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .divider-container::before,
+        .divider-container::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .divider-text {
+            padding: 0 10px;
+            color: #666;
+            font-size: 0.75rem;
+            font-style: normal !important;
+        }
+        .btn-social {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            color: #333;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.6rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-style: normal !important;
+            transition: background-color 0.2s;
+        }
+        .btn-social:hover {
+            background-color: #f9f9f9;
+        }
+        .btn-social img {
+            width: 18px;
+            height: 18px;
+        }
+        .signup-text {
+            font-size: 0.85rem;
+            color: #333;
+            text-align: center;
+            margin-top: 2rem;
+            font-style: normal !important;
+        }
+        .signup-link {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-image-container {
+            height: 100%;
+            min-height: 600px;
+            padding: 2rem;
+        }
+        .login-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px; /* Rounded corners as in design */
+        }
+        @media (max-width: 991px) {
+            .login-image-container {
+                min-height: 400px;
+                padding: 1rem;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+
+    <main>
+        <section class="login-section py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    
+                    <!-- Left Column: Form -->
+                    <div class="col-12 col-lg-6 px-4 px-md-5" data-aos="fade-right">
+                        <div class="mx-auto" style="max-width: 450px;">
+                            <h1 class="login-title">Welcome back!</h1>
+                            <p class="login-subtitle">Enter your Credentials to access your account</p>
+
+                            <form>
+                                <!-- Email Field -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                </div>
+
+                                <!-- Password Field -->
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <label for="password" class="form-label mb-0">Password</label>
+                                        <a href="#" class="forgot-link">forgot password</a>
+                                    </div>
+                                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                                </div>
+
+                                <!-- Remember Me -->
+                                <div class="mb-4 form-check d-flex align-items-center gap-2">
+                                    <input type="checkbox" class="form-check-input mt-0" id="remember" style="border-radius: 3px; cursor: pointer;">
+                                    <label class="form-check-label" for="remember" style="cursor: pointer;">Remember for 30 days</label>
+                                </div>
+
+                                <!-- Login Button -->
+                                <button type="button" class="btn btn-login w-100">Login</button>
+                            </form>
+
+                            <!-- Divider -->
+                            <div class="divider-container">
+                                <span class="divider-text">Or</span>
+                            </div>
+
+                            <!-- Social Logins -->
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <a href="#" class="text-decoration-none d-block">
+                                        <div class="btn-social">
+                                            <img src="./assets/images/google.webp" alt="Google">
+                                            Sign in with Google
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <a href="#" class="text-decoration-none d-block">
+                                        <div class="btn-social">
+                                            <i class="bi bi-apple fs-6" style="color: #000; font-style: normal !important;"></i>
+                                            Sign in with Apple
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Sign Up Link -->
+                            <div class="signup-text">
+                                Don't have an account? <a href="signup.html" class="signup-link">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Image -->
+                    <div class="col-12 col-lg-6" data-aos="fade-left" data-aos-delay="100">
+                        <div class="login-image-container">
+                            <img src="./assets/images/login.webp" class="login-image shadow-sm" alt="Store Interior">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.text();
         })
         .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
+            const placeholder = document.getElementById('header-placeholder');
+            placeholder.innerHTML = data;
+            // Make the placeholder itself sticky so the injected header stays on top
+            placeholder.style.position = 'sticky';
+            placeholder.style.top = '0';
+            placeholder.style.zIndex = '1050';
         })
         .catch(error => console.warn('Could not load header.html (If running locally without server, CORS might block fetch).', error));
 

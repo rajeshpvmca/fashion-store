@@ -13,7 +13,7 @@ body {
     font-family: var(--bs-body-font-family) !important;
     font-style: italic !important;
     color: var(--primary-color);
-    overflow-x: hidden; /* Prevent horizontal scroll from AOS or Swiper */
+    overflow-x: clip; /* Prevent horizontal scroll from AOS or Swiper */
 }
 
 /* Force Italic globally per user request */
