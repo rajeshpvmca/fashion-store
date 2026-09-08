@@ -16,6 +16,14 @@ body {
     overflow-x: clip; /* Prevent horizontal scroll from AOS or Swiper */
 }
 
+/* Active Nav Link */
+.navbar-nav .nav-link.active {
+    font-weight: 700 !important;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+}
+
 /* Force Italic globally per user request */
 h1, h2, h3, h4, h5, h6, p, a, span, button, input, div, li {
     font-style: italic !important;

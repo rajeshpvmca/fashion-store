@@ -12,6 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
             placeholder.style.position = 'sticky';
             placeholder.style.top = '0';
             placeholder.style.zIndex = '1050';
+
+            // Set active menu link based on current URL
+            let currentPath = window.location.pathname.split('/').pop();
+            if (currentPath === '') currentPath = 'index.html'; // Default to index if at root
+            
+            const navLinks = placeholder.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPath) {
+                    link.classList.add('active');
+                }
+            });
         })
         .catch(error => console.warn('Could not load header.html (If running locally without server, CORS might block fetch).', error));
 
