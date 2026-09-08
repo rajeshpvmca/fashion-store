@@ -38,15 +38,38 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.warn('Could not load footer.html', error));
 
-    // 3. Initialize AOS Animations
-    setTimeout(() => {
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50,
-            easing: 'ease-in-out'
-        });
-    }, 300);
+    // 3. Preloader & AOS Animations
+    const preloader = document.querySelector('.site-preloader');
+    if (preloader) {
+        // Wait 2 seconds as requested, then fade out preloader
+        setTimeout(() => {
+            preloader.classList.add('fade-out');
+            
+            // Wait for fade transition, then remove and init animations
+            setTimeout(() => {
+                preloader.remove();
+                if(typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: 800,
+                        once: true,
+                        offset: 50,
+                        easing: 'ease-in-out'
+                    });
+                }
+            }, 500);
+        }, 2000);
+    } else {
+        setTimeout(() => {
+            if(typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 50,
+                    easing: 'ease-in-out'
+                });
+            }
+        }, 300);
+    }
 
     // 4. Initialize Swiper Carousels
     initSwipers();

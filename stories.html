@@ -14,19 +14,16 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <style>
         .everworld-title {
-            font-size: 4.5rem;
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-size: clamp(4rem, 12vw, 8.5rem);
+            font-weight: 800;
+            letter-spacing: -3px;
             font-style: normal !important;
-        }
-        @media (max-width: 768px) {
-            .everworld-title {
-                font-size: 3rem;
-            }
+            line-height: 1;
         }
         .top-line {
-            border-top: 3px solid #000;
+            border-top: 12px solid #1a1a1a;
             width: 100%;
+            margin-top: 2rem;
         }
         .story-kicker {
             font-size: 0.65rem;
@@ -65,16 +62,25 @@
     </style>
 </head>
 <body class="bg-white">
+
+    <!-- Preloader -->
+    <div class="site-preloader">
+                <div class="preloader-content">
+            <div class="preloader-logo"></div>
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
+
     
     <!-- Dynamic Header -->
     <div id="header-placeholder"></div>
 
-    <main class="pt-5 mt-4">
-        <div class="container">
+    <main class="pt-4 mt-2">
+        <div class="container px-4 px-md-5">
             <!-- Hero Section -->
             <div class="top-line pt-4 mb-5" data-aos="fade-up">
-                <h1 class="everworld-title text-dark mb-3">everworld</h1>
-                <p class="fs-6 text-dark" style="max-width: 400px; font-style: normal !important;">
+                <h1 class="everworld-title text-dark mb-4">everworld</h1>
+                <p class="text-dark" style="font-size: 1.3rem; max-width: 600px; line-height: 1.5;">
                     We're on a mission to clean up a dirty industry.<br>
                     These are the people, stories, and ideas that will help us get there.
                 </p>
@@ -196,10 +202,10 @@
         </div>
 
         <!-- Social Follow Banner -->
-        <div class="bg-black text-white text-center text-md-start py-5" data-aos="fade-up">
-            <div class="container px-4 px-md-5 d-flex flex-column flex-md-row align-items-center justify-content-between">
-                <h3 class="fs-3 fw-bold mb-4 mb-md-0" style="font-style: normal !important;">Follow us on social for more</h3>
-                <a href="404.html" class="btn btn-light rounded-0 px-4 py-2 fs-7 fw-medium" style="font-style: normal !important;">@everlane/instagram</a>
+        <div class="bg-black text-white py-5" data-aos="fade-up">
+            <div class="container px-4 px-md-5 py-4">
+                <h2 class="fw-bold mb-4" style="font-style: normal !important; font-size: 2.5rem; letter-spacing: -0.5px;">Follow us on social for more</h2>
+                <a href="404.html" class="btn btn-light rounded-2 px-4 py-2 fw-bold" style="font-style: normal !important; font-size: 0.85rem;">@Everlane Instagram</a>
             </div>
         </div>
 
@@ -216,3 +222,4 @@
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
+

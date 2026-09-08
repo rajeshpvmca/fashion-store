@@ -16,13 +16,13 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <style>
         .blog-hero {
-            height: 75vh;
-            min-height: 500px;
-            background: url('./assets/images/blog-banner.webp') no-repeat center top / cover;
+            height: 80vh;
+            min-height: 600px;
+            background: url('./assets/images/blog-banner.webp') no-repeat center center / cover;
             position: relative;
         }
         .blog-hero-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%);
             position: absolute;
             bottom: 0;
             left: 0;
@@ -87,23 +87,33 @@
     </style>
 </head>
 <body class="bg-white">
+
+    <!-- Preloader -->
+    <div class="site-preloader">
+                <div class="preloader-content">
+            <div class="preloader-logo"></div>
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
+
     
     <!-- Dynamic Header -->
     <div id="header-placeholder"></div>
 
     <main>
         <!-- Hero Section -->
-        <section class="blog-hero d-flex align-items-end pb-5" data-aos="fade-in">
+        <section class="blog-hero d-flex align-items-center pb-5" data-aos="fade-in">
             <div class="blog-hero-overlay"></div>
-            <div class="container position-relative z-1 text-white">
-                <div class="col-12 col-md-8 col-lg-6">
-                    <a href="stories.html" class="back-link mb-4">
-                        <i class="bi bi-arrow-left"></i>
-                    </a>
-                    <p class="text-uppercase mb-2 fw-bold fs-8 tracking-wide" style="letter-spacing: 1px; font-style: normal !important;">Style</p>
-                    <h1 class="display-4 fw-medium mb-3" style="font-style: normal !important; letter-spacing: -1px;">How To Style Winter Whites</h1>
-                    <p class="fs-6 lh-base mb-0" style="max-width: 450px;">
-                        A complete guide on how to wear white this season without looking like you're going to a winter party.
+            <div class="container position-relative z-1 text-white pt-5 mt-5">
+                <div class="col-12 col-md-10 col-lg-8 mt-5 pt-4">
+                    <span class="d-inline-block border border-white rounded-pill px-4 py-1 mb-4 fs-8" style="font-style: italic; background: rgba(0,0,0,0.1);">Style</span>
+                    <h1 class="fw-bold mb-4" style="font-style: normal !important; font-size: clamp(3rem, 6vw, 4.5rem); letter-spacing: -1px; line-height: 1.15;">
+                        Style<br>
+                        How To Style Winter<br>
+                        Whites
+                    </h1>
+                    <p class="fs-5 lh-base mb-0" style="max-width: 650px; font-style: italic;">
+                        Redefine your winter wardrobe with the timeless elegance of winter whites with this style guide.
                     </p>
                 </div>
             </div>
@@ -116,9 +126,9 @@
             <!-- Intro Section (Socials + Intro Text) -->
             <div class="row mb-5 pb-2">
                 <div class="col-12 col-md-3 mb-4 mb-md-0 d-flex social-share">
-                    <i class="bi bi-pinterest" style="font-style: normal !important;"></i>
-                    <i class="bi bi-facebook" style="font-style: normal !important;"></i>
                     <i class="bi bi-twitter-x" style="font-style: normal !important;"></i>
+                    <i class="bi bi-facebook" style="font-style: normal !important;"></i>
+                    <i class="bi bi-linkedin" style="font-style: normal !important;"></i>
                 </div>
                 <div class="col-12 col-md-9">
                     <p class="blog-intro-text text-dark" style="font-style: normal !important;">
@@ -170,7 +180,11 @@
             <div class="container px-4 px-md-5">
                 <h3 class="fs-4 fw-bold text-center mb-5 text-dark" style="font-style: normal !important;">The Winter Whites Edit</h3>
                 
-                <div class="position-relative px-4" data-aos="fade-up">
+                <div class="position-relative px-3 px-md-4" data-aos="fade-up">
+                    <!-- Navigation (Placed outside the swiper to avoid overlapping images) -->
+                    <div class="swiper-button-prev carousel-arrow swiper-button-prev-blog" style="left: -10px; top: 35%; margin-top: 0; z-index: 10;"></div>
+                    <div class="swiper-button-next carousel-arrow swiper-button-next-blog" style="right: -10px; top: 35%; margin-top: 0; z-index: 10;"></div>
+                    
                     <div class="swiper blog-products-swiper">
                         <div class="swiper-wrapper text-start">
                             <!-- Product 1 -->
@@ -223,15 +237,62 @@
                                     <p class="fs-8 text-secondary mb-0">$168</p>
                                 </a>
                             </div>
+                            <!-- Product 1 -->
+                            <div class="swiper-slide">
+                                <a href="404.html" class="text-decoration-none text-dark d-block">
+                                    <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                        <img src="./assets/images/blog_03.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                                    </div>
+                                    <h6 class="fs-8 fw-normal mb-1">The Cashmere Crew</h6>
+                                    <p class="fs-8 text-secondary mb-0">$120</p>
+                                </a>
+                            </div>
+                            <!-- Product 2 -->
+                            <div class="swiper-slide">
+                                <a href="404.html" class="text-decoration-none text-dark d-block">
+                                    <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                        <img src="./assets/images/blog_04.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                                    </div>
+                                    <h6 class="fs-8 fw-normal mb-1">The Utility Barrel Pant</h6>
+                                    <p class="fs-8 text-secondary mb-0">$98</p>
+                                </a>
+                            </div>
+                            <!-- Product 3 -->
+                            <div class="swiper-slide">
+                                <a href="404.html" class="text-decoration-none text-dark d-block">
+                                    <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                        <img src="./assets/images/blog_05.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                                    </div>
+                                    <h6 class="fs-8 fw-normal mb-1">The Ribbed Beanie</h6>
+                                    <p class="fs-8 text-secondary mb-0">$45</p>
+                                </a>
+                            </div>
+                            <!-- Product 4 -->
+                            <div class="swiper-slide">
+                                <a href="404.html" class="text-decoration-none text-dark d-block">
+                                    <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                        <img src="./assets/images/blog_06.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                                    </div>
+                                    <h6 class="fs-8 fw-normal mb-1">The Chelsea Boot</h6>
+                                    <p class="fs-8 text-secondary mb-0">$195</p>
+                                </a>
+                            </div>
+                            <!-- Product 5 -->
+                            <div class="swiper-slide">
+                                <a href="404.html" class="text-decoration-none text-dark d-block">
+                                    <div class="ratio overflow-hidden bg-light mb-3" style="--bs-aspect-ratio: 125%;">
+                                        <img src="./assets/images/blog_07.webp" class="object-fit-cover w-100 h-100 transition-transform" alt="Product">
+                                    </div>
+                                    <h6 class="fs-8 fw-normal mb-1">The Puffer Jacket</h6>
+                                    <p class="fs-8 text-secondary mb-0">$168</p>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <!-- Navigation -->
-                    <div class="swiper-button-prev carousel-arrow swiper-button-prev-blog" style="left: -10px;"></div>
-                    <div class="swiper-button-next carousel-arrow swiper-button-next-blog" style="right: -10px;"></div>
                 </div>
 
                 <div class="text-center mt-5" data-aos="fade-up">
-                    <a href="404.html" class="btn btn-dark rounded-0 px-5 py-2 fs-8 fw-bold text-uppercase" style="font-style: normal !important;">Shop All</a>
+                    <a href="404.html" class="btn btn-dark rounded-0 px-5 py-2 fs-8 fw-bold text-uppercase" style="font-style: normal !important;">Shop Now</a>
                 </div>
             </div>
         </section>
@@ -309,3 +370,4 @@
     </script>
 </body>
 </html>
+
